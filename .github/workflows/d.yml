@@ -48,6 +48,9 @@ jobs:
         with:
           llvm: ${{ matrix.clang }}
 
+      - name: test cpp
+        run: cpp --version
+
       - name: Run tests
         continue-on-error: ${{ contains(matrix.os, 'macos') }}
         run: dub test -q --build=unittest-cov --arch=${{ matrix.arch }}
