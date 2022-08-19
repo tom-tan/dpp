@@ -57,7 +57,7 @@ jobs:
 
       - name: Run tests
         continue-on-error: ${{ contains(matrix.os, 'macos') }}
-        run: dub test -q --build=unittest-cov --arch=${{ matrix.arch }}
+        run: dub test -q --build=unittest-cov --arch=${{ matrix.arch }} -- @dstep_issues
         env:
           LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
 
