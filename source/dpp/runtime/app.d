@@ -246,7 +246,6 @@ private void runCPreProcessor(in string cppPath, in string tmpFileName, in strin
     import std.string: join, splitLines;
     import std.stdio: File;
     import std.algorithm: filter, startsWith;
-    import std.range: tee;
 
     const cpp = cppPath == ""
         ? (executeShell("clang-cpp --version").status == 0 ? "clang-cpp" : "cpp")
@@ -266,6 +265,7 @@ private void runCPreProcessor(in string cppPath, in string tmpFileName, in strin
     enforce(ret.status == 0, text("Could not run `", cppArgs.join(" "), "`:\n", ret.output));
 
     {
+        import std : tee, writefln;
         auto outputFile = File(outputFileName, "w");
         auto lines = ret.
             output
