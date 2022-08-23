@@ -70,10 +70,14 @@ jobs:
           path: stddef.h
       - run: |
           dub run -- --keep-pre-cpp-files --keep-d-files --compiler=ldc2 issue400.dpp
+          echo "result: $?"
           echo "======="
           cat issue400.d.tmp
-          echo "======="
+          echo "==== after cpp ==="
           cpp -w --comments issue400.d.tmp
+          echo "==== generated d ==="
+          cat issue400.d
+
       - uses: actions/upload-artifact@v3
         with:
           name: issue400.d.tmp
