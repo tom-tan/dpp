@@ -245,7 +245,8 @@ private void runCPreProcessor(in string cppPath, in string tmpFileName, in strin
     import std.conv: text;
     import std.string: join, splitLines;
     import std.stdio: File;
-    import std.algorithm: filter, startsWith, tee;
+    import std.algorithm: filter, startsWith;
+    import std.range: tee;
 
     const cpp = cppPath == ""
         ? (executeShell("clang-cpp --version").status == 0 ? "clang-cpp" : "cpp")
