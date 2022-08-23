@@ -53,11 +53,13 @@ jobs:
           llvm: ${{ matrix.clang }}
 
       - name: test cpp
-        run: cpp --version
+        run: |
+          cpp --version
+          clang -v -xc++ /dev/null -fsyntax-only
 
       - name: Run tests
         continue-on-error: ${{ contains(matrix.os, 'macos') }}
-        run: dub test -q --build=unittest-cov --arch=${{ matrix.arch }} -- @dstep_issues
+        run: dub test -q --build=unittest-cov --arch=${{ matrix.arch }} -- @issue
         env:
           LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
 
