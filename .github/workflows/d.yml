@@ -72,11 +72,11 @@ jobs:
           grep "include_next" /Applications/Xcode_13.2.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks
           echo "======"
 
-      - name: Run tests
-        continue-on-error: ${{ contains(matrix.os, 'macos') }}
-        run: dub test -q --build=unittest-cov --arch=${{ matrix.arch }} -- @issue
-        env:
-          LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
+      # - name: Run tests
+      #   continue-on-error: ${{ contains(matrix.os, 'macos') }}
+      #   run: dub test -q --build=unittest-cov --arch=${{ matrix.arch }} -- @issue
+      #   env:
+      #     LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
 
       # - name: Build binary
       #   run: dub build -q --arch=${{ matrix.arch }}
