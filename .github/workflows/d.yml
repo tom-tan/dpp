@@ -63,10 +63,11 @@ jobs:
           grep "include_next" /Users/runner/hostedtoolcache/llvm/12.0.0/x64/bin/../include/c++/v1/stddef.h
           echo "======"
           cat /Users/runner/hostedtoolcache/llvm/12.0.0/x64/bin/../include/c++/v1/stddef.h
+          cp /Users/runner/hostedtoolcache/llvm/12.0.0/x64/bin/../include/c++/v1/stddef.h stddef.h
       - uses: actions/upload-artifact@v3
         with:
           name: stddef.h
-          path: /Users/runner/hostedtoolcache/llvm/12.0.0/x64/bin/../include/c++/v1/stddef.h
+          path: stddef.h
       - run: |
           dub run -- --keep-pre-cpp-files --keep-d-files issue400.dpp || true
       - uses: actions/upload-artifact@v3
