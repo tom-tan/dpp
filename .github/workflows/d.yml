@@ -82,6 +82,10 @@ jobs:
         with:
           name: issue400.d.tmp
           path: issue400.d.tmp
+      - uses: actions/upload-artifact@v3
+        with:
+          name: issue400.d
+          path: issue400.d
 
 
       # - name: Run tests
