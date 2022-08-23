@@ -70,6 +70,7 @@ jobs:
           path: stddef.h
       - run: |
           dub run -- --keep-pre-cpp-files --keep-d-files --compiler=ldc2 issue400.dpp || true
+          cat issue400.d.tmp
       - uses: actions/upload-artifact@v3
         with:
           name: issue400.d.tmp
