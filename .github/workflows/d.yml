@@ -93,7 +93,9 @@ jobs:
 
       - name: Setup
         run: |
-          ls $(brew --prefix llvm)
+          echo "==="
+          ls -l $(brew --prefix llvm)/bin
+          echo "==="
           brew uninstall llvm
           sudo ln -s /Library/Developer/CommandLineTools/usr/lib/libclang.dylib /usr/local/lib/libclang.dylib
 
