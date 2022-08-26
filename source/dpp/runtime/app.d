@@ -134,6 +134,12 @@ private void preprocess(in from!"dpp.runtime.options".Options options,
         outputFile.writeln("// before preample");
         outputFile.writeln(preamble(options.ignoreMacros));
         outputFile.writeln("// before dlangDeclarations");
+        import std : stderr;
+        () @trusted {
+        stderr.writeln("============ code: start dlang Decl =============");
+        stderr.writeln(translationText.dlangDeclarations);
+        stderr.writeln("============ code: end dlang Decl =============");
+        }();
         outputFile.writeln(translationText.dlangDeclarations);
 
         outputFile.writeln("// before writing original D code");
