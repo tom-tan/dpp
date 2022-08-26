@@ -126,12 +126,17 @@ private void preprocess(in from!"dpp.runtime.options".Options options,
 
         const translationText = translationText(options, inputFileName);
 
+        outputFile.writeln("// before UndefLines");
         writeUndefLines(inputFileName, outputFile);
 
+        outputFile.writeln("// before module declaration");
         outputFile.writeln(translationText.moduleDeclaration);
+        outputFile.writeln("// before preample");
         outputFile.writeln(preamble(options.ignoreMacros));
+        outputFile.writeln("// before dlangDeclarations");
         outputFile.writeln(translationText.dlangDeclarations);
 
+        outputFile.writeln("// before writing original D code");
         // write original D code
         writeDlangLines(inputFileName, outputFile);
     }
