@@ -273,25 +273,15 @@ private void runCPreProcessor(in string cppPath, in string tmpFileName, in strin
     enforce(ret.status == 0, text("Could not run `", cppArgs.join(" "), "`:\n", ret.output));
 
     {
-        import std : stderr, tee;
-        () @trusted {
-            stderr.writeln("=== start: output of cpp -w --comments ===");
-            stderr.writeln(ret.output);
-            stderr.writeln("=== end: output of cpp -w --comments ===");
-        }();
         auto outputFile = File(outputFileName, "w");
         auto lines = ret.
             output
             .splitLines
-            .tee!((a) @trusted{stderr.writefln!"%s: %s"(!a.startsWith("#"), a);})
             .filter!(a => !a.startsWith("#"))
             ;
-        () @trusted {stderr.writeln("==== start runCPP ====");}();
         foreach(line; lines) {
-            () @trusted {stderr.writeln(line);}();
             outputFile.writeln(line);
         }
-        () @trusted {stderr.writeln("==== end runCPP ====");}();
     }
 }
 
