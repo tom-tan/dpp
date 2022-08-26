@@ -50,11 +50,11 @@ jobs:
 
       - name: Run tests
         run: |
-          dub run -- --ignore-system-paths --preprocess-only usesample.dpp
+          dub run -- --ignore-system-paths --preprocess-only issue.dpp
           echo "===== preprocessed ====="
-          cat usesample.d
+          cat issue.d
           echo "===== preprocessed ====="
-          ldc2 -c usesample.d
+          ldc2 -c issue.d
         env:
           LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
 
@@ -91,10 +91,10 @@ jobs:
 
       - name: Run tests
         run: |
-          dub run -- --ignore-system-paths --preprocess-only usesample.dpp
+          dub run -- --ignore-system-paths --preprocess-only issue.dpp
           echo "===== preprocessed ====="
-          cat usesample.d
+          cat issue.d
           echo "===== preprocessed ====="
-          ldc2 -c usesample.d
+          ldc2 -c issue.d
         # env:
         #   LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
