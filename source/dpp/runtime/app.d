@@ -126,23 +126,12 @@ private void preprocess(in from!"dpp.runtime.options".Options options,
 
         const translationText = translationText(options, inputFileName);
 
-        outputFile.writeln("// before UndefLines");
         writeUndefLines(inputFileName, outputFile);
 
-        outputFile.writeln("// before module declaration");
         outputFile.writeln(translationText.moduleDeclaration);
-        outputFile.writeln("// before preample");
         outputFile.writeln(preamble(options.ignoreMacros));
-        outputFile.writeln("// before dlangDeclarations");
-        import std : stderr;
-        () @trusted {
-        stderr.writeln("============ code: start dlang Decl =============");
-        stderr.writeln(translationText.dlangDeclarations);
-        stderr.writeln("============ code: end dlang Decl =============");
-        }();
         outputFile.writeln(translationText.dlangDeclarations);
 
-        outputFile.writeln("// before writing original D code");
         // write original D code
         writeDlangLines(inputFileName, outputFile);
     }
@@ -285,6 +274,11 @@ private void runCPreProcessor(in string cppPath, in string tmpFileName, in strin
 
     {
         import std : stderr, tee;
+        () @trusted {
+            stderr.writeln("=== start: output of cpp -w --comments ===");
+            stderr.writeln(ret.output);
+            stderr.writeln("=== end: output of cpp -w --comments ===");
+        }();
         auto outputFile = File(outputFileName, "w");
         auto lines = ret.
             output
