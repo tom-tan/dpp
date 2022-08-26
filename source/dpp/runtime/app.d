@@ -284,13 +284,14 @@ private void runCPreProcessor(in string cppPath, in string tmpFileName, in strin
     enforce(ret.status == 0, text("Could not run `", cppArgs.join(" "), "`:\n", ret.output));
 
     {
+        import std : stderr, tee;
         auto outputFile = File(outputFileName, "w");
         auto lines = ret.
             output
             .splitLines
+            .tee!((a) @trusted{stderr.writefln!"%s: %s"(!a.startsWith("#"), a);})
             .filter!(a => !a.startsWith("#"))
             ;
-        import std : stderr;
         () @trusted {stderr.writeln("==== start runCPP ====");}();
         foreach(line; lines) {
             () @trusted {stderr.writeln(line);}();
