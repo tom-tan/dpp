@@ -290,10 +290,13 @@ private void runCPreProcessor(in string cppPath, in string tmpFileName, in strin
             .splitLines
             .filter!(a => !a.startsWith("#"))
             ;
-
+        import std : stderr;
+        () @trusted {stderr.writeln("==== start runCPP ====");}();
         foreach(line; lines) {
+            () @trusted {stderr.writeln(line);}();
             outputFile.writeln(line);
         }
+        () @trusted {stderr.writeln("==== end runCPP ====");}();
     }
 }
 
