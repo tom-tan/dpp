@@ -50,7 +50,7 @@ jobs:
 
       - name: Run tests
         run: |
-          dub run -q test
+          dub test
         env:
           LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
 
@@ -91,7 +91,7 @@ jobs:
 
       - name: Run test1
         run: |
-          dub run -q test
+          dub test
 
       - name: Run tests
         run: |
