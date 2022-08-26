@@ -51,6 +51,11 @@ jobs:
       - name: Run tests
         run: |
           dub run -q -- --ignore-system-paths --preprocess-only issue.dpp
+
+          echo "===== start process ddecl =====" >&2
+          cpp -w --comments ddecl.d >&2
+          echo "===== end process ddecl =====" >&2
+
           echo "===== preprocessed =====" >&2
           cat issue.d >&2
           echo "===== preprocessed =====" >&2
@@ -92,6 +97,12 @@ jobs:
       - name: Run tests
         run: |
           dub run -q -- --ignore-system-paths --preprocess-only issue.dpp
+
+          echo "===== start process ddecl =====" >&2
+          cpp -w --comments ddecl.d >&2
+          echo "===== end process ddecl =====" >&2
+
+          echo "===== preprocessed =====" >&2
           echo "===== preprocessed =====" >&2
           cat issue.d >&2
           echo "===== preprocessed =====" >&2
