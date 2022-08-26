@@ -89,19 +89,19 @@ jobs:
       #     brew uninstall llvm
           # sudo ln -s /Library/Developer/CommandLineTools/usr/lib/libclang.dylib /usr/local/lib/libclang.dylib
 
-      - name: Run test1
-        run: |
-          dub test
+      # - name: Run test1
+      #   run: |
+      #     dub test
 
       - name: Run tests
         run: |
           dub run -q -- --ignore-system-paths --preprocess-only issue.dpp
 
-          echo "cpp info:" >&2
-          cpp --version >&2
-          echo "===== start process ddecl /w cpp =====" >&2
-          cpp -w --comments ddecl.d >&2
-          echo "===== end process ddecl =====" >&2
           ldc2 -c issue.d
+        # echo "cpp info:" >&2
+        # cpp --version >&2
+        # echo "===== start process ddecl /w cpp =====" >&2
+        # cpp -w --comments ddecl.d >&2
+        # echo "===== end process ddecl =====" >&2
         # env:
         #   LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
