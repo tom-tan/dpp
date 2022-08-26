@@ -52,15 +52,8 @@ jobs:
         run: |
           dub run -q -- --ignore-system-paths --preprocess-only issue.dpp
 
-          which clang-cpp 2> /dev/null
-          ret=$?
-          echo "clang-cpp?: $ret"
-          echo "===== cpp info:" >&2
-          cpp --version >&2
-          echo "===== start process ddecl /w env =====" >&2
-          cpp -w --comments ddecl.d >&2
-          echo "===== start process ddecl /wo env =====" >&2
-          env -i sh -c 'cpp -w --comments ddecl.d' >&2
+          echo "===== start process ddecl /w clang-cpp =====" >&2
+          clang-cpp -w --comments ddecl.d >&2
           echo "===== end process ddecl =====" >&2
 
           echo "===== preprocessed =====" >&2
@@ -105,15 +98,8 @@ jobs:
         run: |
           dub run -q -- --ignore-system-paths --preprocess-only issue.dpp
 
-          which clang-cpp 2> /dev/null
-          ret=$?
-          echo "clang-cpp?: $ret"
-          echo "===== cpp info:" >&2
-          cpp --version >&2
-          echo "===== start process ddecl /w env =====" >&2
+          echo "===== start process ddecl /w cpp =====" >&2
           cpp -w --comments ddecl.d >&2
-          echo "===== start process ddecl /wo env =====" >&2
-          env -i sh -c 'cpp -w --comments ddecl.d' >&2
           echo "===== end process ddecl =====" >&2
 
           echo "===== preprocessed =====" >&2
