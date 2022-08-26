@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, windows-2019, macos-10.15]
+        os: [macos-10.15]
         dc:
           # - dmd-2.099.0
           - ldc-1.28.1
@@ -50,10 +50,10 @@ jobs:
 
       - name: Run tests
         run: |
-          dub run -- --ignore-system-paths --preprocess-only issue.dpp
-          echo "===== preprocessed ====="
-          cat issue.d
-          echo "===== preprocessed ====="
+          dub run -q -- --ignore-system-paths --preprocess-only issue.dpp
+          echo "===== preprocessed =====" >&2
+          cat issue.d >&2
+          echo "===== preprocessed =====" >&2
           ldc2 -c issue.d
         env:
           LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
@@ -91,10 +91,10 @@ jobs:
 
       - name: Run tests
         run: |
-          dub run -- --ignore-system-paths --preprocess-only issue.dpp
-          echo "===== preprocessed ====="
-          cat issue.d
-          echo "===== preprocessed ====="
+          dub run -q -- --ignore-system-paths --preprocess-only issue.dpp
+          echo "===== preprocessed =====" >&2
+          cat issue.d >&2
+          echo "===== preprocessed =====" >&2
           ldc2 -c issue.d
         # env:
         #   LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
