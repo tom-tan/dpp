@@ -59,7 +59,11 @@ jobs:
 
       - name: Run tests
         run: |
-          dub run -q -- --ignore-system-paths issue.dpp
+          dub run -q -- --ignore-system-paths --preprocess-only issue.dpp
+          echo "==="
+          cat issue.d
+          echo "==="
+          dmd -run issue.d
         env:
           LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
 
@@ -98,4 +102,8 @@ jobs:
 
       - name: Run tests
         run: |
-          dub run -q -- --ignore-system-paths issue.dpp
+          dub run -q -- --ignore-system-paths --preprocess-only issue.dpp
+          echo "==="
+          cat issue.d
+          echo "==="
+          dmd -run issue.d
