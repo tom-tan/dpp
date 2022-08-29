@@ -10,7 +10,7 @@ jobs:
       matrix:
         os: [macos-10.15]
         dc:
-          - ldc-1.28.1
+          - dmd-2.099.0
         arch:
           - x86_64
         clang:
@@ -58,7 +58,7 @@ jobs:
 
       - name: Run tests
         run: |
-          DC=ldc2 dub run -q --compiler=ldc2 -- --ignore-system-paths issue.dpp
+          dub run -q -- --ignore-system-paths issue.dpp
         env:
           LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
 
@@ -68,7 +68,7 @@ jobs:
       matrix:
         os: [macos-10.15]
         dc:
-          - ldc-1.28.1
+          - dmd-2.099.0
         arch:
           - x86_64
     runs-on: ${{ matrix.os }}
@@ -96,4 +96,4 @@ jobs:
 
       - name: Run tests
         run: |
-          DC=ldc2 dub run -q --compiler=ldc2 -- --ignore-system-paths issue.dpp
+          dub run -q -- --ignore-system-paths issue.dpp
