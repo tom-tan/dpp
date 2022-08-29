@@ -10,7 +10,6 @@ jobs:
       matrix:
         os: [macos-10.15]
         dc:
-          # - dmd-2.099.0
           - ldc-1.28.1
         arch:
           - x86_64
@@ -48,9 +47,18 @@ jobs:
         with:
           llvm: ${{ matrix.clang }}
 
+      - name: print cpp info
+        run: |
+          echo -n "cpp path: "
+          if [ -x "$(which cpp 2> /dev/null)" ]; then
+            which cpp
+          else
+            which clang-cpp
+          fi
+
       - name: Run tests
         run: |
-          dub test
+          dub run -q -- --ignore-system-paths issue.dpp
         env:
           LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
 
@@ -60,12 +68,9 @@ jobs:
       matrix:
         os: [macos-10.15]
         dc:
-          # - dmd-2.099.0
           - ldc-1.28.1
         arch:
           - x86_64
-        # clang:
-        #   - 12.0.0
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -80,28 +85,15 @@ jobs:
         with:
           compiler: ${{ matrix.dc }}
 
-      - name: Setup
+      - name: print cpp info
         run: |
-          echo "==="
-          ls -l $(brew --prefix llvm)/bin
-          echo "==="
-      # - run: |
-      #     brew uninstall llvm
-          # sudo ln -s /Library/Developer/CommandLineTools/usr/lib/libclang.dylib /usr/local/lib/libclang.dylib
-
-      # - name: Run test1
-      #   run: |
-      #     dub test
+          echo -n "cpp path: "
+          if [ -x "$(which cpp 2> /dev/null)" ]; then
+            which cpp
+          else
+            which clang-cpp
+          fi
 
       - name: Run tests
         run: |
-          dub run -q -- --ignore-system-paths --preprocess-only issue.dpp
-
-          ldc2 -c issue.d
-        # echo "cpp info:" >&2
-        # cpp --version >&2
-        # echo "===== start process ddecl /w cpp =====" >&2
-        # cpp -w --comments ddecl.d >&2
-        # echo "===== end process ddecl =====" >&2
-        # env:
-        #   LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
+          dub run -q -- --ignore-system-paths issue.dpp
