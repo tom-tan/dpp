@@ -58,7 +58,7 @@ jobs:
 
       - name: Run tests
         run: |
-          dub run -q -- --ignore-system-paths issue.dpp
+          dub run -q --compiler=ldc2 -- --ignore-system-paths issue.dpp
         env:
           LIBRARY_PATH: "${{ env.LLVM_PATH }}/lib"
 
@@ -96,4 +96,4 @@ jobs:
 
       - name: Run tests
         run: |
-          dub run -q -- --ignore-system-paths issue.dpp
+          dub run -q --compiler=ldc2 -- --ignore-system-paths issue.dpp
