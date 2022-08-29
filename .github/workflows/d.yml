@@ -51,10 +51,11 @@ jobs:
         run: |
           echo -n "cpp path: "
           if [ -x "$(which clang-cpp 2> /dev/null)" ]; then
-            which clang-cpp
+            cpp_bin=$(which clang-cpp)
           else
-            which cpp
+            cpp_bin=$(which cpp)
           fi
+          $cpp_bin --version
 
       - name: Run tests
         run: |
@@ -89,10 +90,11 @@ jobs:
         run: |
           echo -n "cpp path: "
           if [ -x "$(which clang-cpp 2> /dev/null)" ]; then
-            which clang-cpp
+            cpp_bin=$(which clang-cpp)
           else
-            which cpp
+            cpp_bin=$(which cpp)
           fi
+          $cpp_bin --version
 
       - name: Run tests
         run: |
