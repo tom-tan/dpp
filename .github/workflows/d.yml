@@ -50,10 +50,10 @@ jobs:
       - name: print cpp info
         run: |
           echo -n "cpp path: "
-          if [ -x "$(which cpp 2> /dev/null)" ]; then
-            which cpp
-          else
+          if [ -x "$(which clang-cpp 2> /dev/null)" ]; then
             which clang-cpp
+          else
+            which cpp
           fi
 
       - name: Run tests
@@ -88,10 +88,10 @@ jobs:
       - name: print cpp info
         run: |
           echo -n "cpp path: "
-          if [ -x "$(which cpp 2> /dev/null)" ]; then
-            which cpp
-          else
+          if [ -x "$(which clang-cpp 2> /dev/null)" ]; then
             which clang-cpp
+          else
+            which cpp
           fi
 
       - name: Run tests
